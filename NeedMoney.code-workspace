@@ -1,0 +1,613 @@
+{
+	"folders": [
+		{
+			"name": "NeedMoney",
+			"path": "."
+		},
+		{
+			"name": "UE5",
+			"path": "E:\\epic\\UE_5.3"
+		}
+	],
+	"settings": {
+		"typescript.tsc.autoDetect": "off",
+		"npm.autoDetect": "off"
+	},
+	"extensions": {
+		"recommendations": [
+			"ms-vscode.cpptools",
+			"ms-dotnettools.csharp"
+		]
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "NeedMoney Win64 Debug Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"NeedMoney",
+					"Win64",
+					"Debug",
+					"D:\\unreal\\NeedMoney\\NeedMoney.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"label": "NeedMoney Win64 Debug Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"NeedMoney",
+					"Win64",
+					"Debug",
+					"D:\\unreal\\NeedMoney\\NeedMoney.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"NeedMoney Win64 Debug Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"label": "NeedMoney Win64 Debug Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"NeedMoney",
+					"Win64",
+					"Debug",
+					"D:\\unreal\\NeedMoney\\NeedMoney.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"label": "NeedMoney Win64 DebugGame Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"NeedMoney",
+					"Win64",
+					"DebugGame",
+					"D:\\unreal\\NeedMoney\\NeedMoney.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"label": "NeedMoney Win64 DebugGame Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"NeedMoney",
+					"Win64",
+					"DebugGame",
+					"D:\\unreal\\NeedMoney\\NeedMoney.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"NeedMoney Win64 DebugGame Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"label": "NeedMoney Win64 DebugGame Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"NeedMoney",
+					"Win64",
+					"DebugGame",
+					"D:\\unreal\\NeedMoney\\NeedMoney.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"label": "NeedMoney Win64 Development Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"NeedMoney",
+					"Win64",
+					"Development",
+					"D:\\unreal\\NeedMoney\\NeedMoney.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"label": "NeedMoney Win64 Development Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"NeedMoney",
+					"Win64",
+					"Development",
+					"D:\\unreal\\NeedMoney\\NeedMoney.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"NeedMoney Win64 Development Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"label": "NeedMoney Win64 Development Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"NeedMoney",
+					"Win64",
+					"Development",
+					"D:\\unreal\\NeedMoney\\NeedMoney.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"label": "NeedMoney Win64 Test Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"NeedMoney",
+					"Win64",
+					"Test",
+					"D:\\unreal\\NeedMoney\\NeedMoney.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"label": "NeedMoney Win64 Test Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"NeedMoney",
+					"Win64",
+					"Test",
+					"D:\\unreal\\NeedMoney\\NeedMoney.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"NeedMoney Win64 Test Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"label": "NeedMoney Win64 Test Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"NeedMoney",
+					"Win64",
+					"Test",
+					"D:\\unreal\\NeedMoney\\NeedMoney.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"label": "NeedMoney Win64 Shipping Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"NeedMoney",
+					"Win64",
+					"Shipping",
+					"D:\\unreal\\NeedMoney\\NeedMoney.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"label": "NeedMoney Win64 Shipping Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"NeedMoney",
+					"Win64",
+					"Shipping",
+					"D:\\unreal\\NeedMoney\\NeedMoney.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"NeedMoney Win64 Shipping Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"label": "NeedMoney Win64 Shipping Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"NeedMoney",
+					"Win64",
+					"Shipping",
+					"D:\\unreal\\NeedMoney\\NeedMoney.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"label": "NeedMoneyEditor Win64 Debug Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"NeedMoneyEditor",
+					"Win64",
+					"Debug",
+					"D:\\unreal\\NeedMoney\\NeedMoney.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"label": "NeedMoneyEditor Win64 Debug Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"NeedMoneyEditor",
+					"Win64",
+					"Debug",
+					"D:\\unreal\\NeedMoney\\NeedMoney.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"NeedMoneyEditor Win64 Debug Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"label": "NeedMoneyEditor Win64 Debug Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"NeedMoneyEditor",
+					"Win64",
+					"Debug",
+					"D:\\unreal\\NeedMoney\\NeedMoney.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"label": "NeedMoneyEditor Win64 DebugGame Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"NeedMoneyEditor",
+					"Win64",
+					"DebugGame",
+					"D:\\unreal\\NeedMoney\\NeedMoney.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"label": "NeedMoneyEditor Win64 DebugGame Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"NeedMoneyEditor",
+					"Win64",
+					"DebugGame",
+					"D:\\unreal\\NeedMoney\\NeedMoney.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"NeedMoneyEditor Win64 DebugGame Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"label": "NeedMoneyEditor Win64 DebugGame Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"NeedMoneyEditor",
+					"Win64",
+					"DebugGame",
+					"D:\\unreal\\NeedMoney\\NeedMoney.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"label": "NeedMoneyEditor Win64 Development Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"NeedMoneyEditor",
+					"Win64",
+					"Development",
+					"D:\\unreal\\NeedMoney\\NeedMoney.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"label": "NeedMoneyEditor Win64 Development Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"NeedMoneyEditor",
+					"Win64",
+					"Development",
+					"D:\\unreal\\NeedMoney\\NeedMoney.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"NeedMoneyEditor Win64 Development Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"label": "NeedMoneyEditor Win64 Development Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"NeedMoneyEditor",
+					"Win64",
+					"Development",
+					"D:\\unreal\\NeedMoney\\NeedMoney.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "E:\\epic\\UE_5.3"
+				}
+			}
+		]
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Launch NeedMoney (Debug)",
+				"request": "launch",
+				"program": "D:\\unreal\\NeedMoney\\Binaries\\Win64\\UnrealGame-Win64-Debug.exe",
+				"preLaunchTask": "NeedMoney Win64 Debug Build",
+				"args": [
+				],
+				"cwd": "E:\\epic\\UE_5.3",
+				"stopAtEntry": false,
+				"console": "externalTerminal",
+				"type": "cppvsdbg",
+				"visualizerFile": "E:\\epic\\UE_5.3\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+				"sourceFileMap": {
+					"D:\\build\\++UE5\\Sync": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"name": "Launch NeedMoney (DebugGame)",
+				"request": "launch",
+				"program": "D:\\unreal\\NeedMoney\\Binaries\\Win64\\UnrealGame-Win64-DebugGame.exe",
+				"preLaunchTask": "NeedMoney Win64 DebugGame Build",
+				"args": [
+				],
+				"cwd": "E:\\epic\\UE_5.3",
+				"stopAtEntry": false,
+				"console": "externalTerminal",
+				"type": "cppvsdbg",
+				"visualizerFile": "E:\\epic\\UE_5.3\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+				"sourceFileMap": {
+					"D:\\build\\++UE5\\Sync": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"name": "Launch NeedMoney (Development)",
+				"request": "launch",
+				"program": "D:\\unreal\\NeedMoney\\Binaries\\Win64\\UnrealGame.exe",
+				"preLaunchTask": "NeedMoney Win64 Development Build",
+				"args": [
+				],
+				"cwd": "E:\\epic\\UE_5.3",
+				"stopAtEntry": false,
+				"console": "externalTerminal",
+				"type": "cppvsdbg",
+				"visualizerFile": "E:\\epic\\UE_5.3\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+				"sourceFileMap": {
+					"D:\\build\\++UE5\\Sync": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"name": "Launch NeedMoney (Test)",
+				"request": "launch",
+				"program": "D:\\unreal\\NeedMoney\\Binaries\\Win64\\UnrealGame-Win64-Test.exe",
+				"preLaunchTask": "NeedMoney Win64 Test Build",
+				"args": [
+				],
+				"cwd": "E:\\epic\\UE_5.3",
+				"stopAtEntry": false,
+				"console": "externalTerminal",
+				"type": "cppvsdbg",
+				"visualizerFile": "E:\\epic\\UE_5.3\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+				"sourceFileMap": {
+					"D:\\build\\++UE5\\Sync": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"name": "Launch NeedMoney (Shipping)",
+				"request": "launch",
+				"program": "D:\\unreal\\NeedMoney\\Binaries\\Win64\\UnrealGame-Win64-Shipping.exe",
+				"preLaunchTask": "NeedMoney Win64 Shipping Build",
+				"args": [
+				],
+				"cwd": "E:\\epic\\UE_5.3",
+				"stopAtEntry": false,
+				"console": "externalTerminal",
+				"type": "cppvsdbg",
+				"visualizerFile": "E:\\epic\\UE_5.3\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+				"sourceFileMap": {
+					"D:\\build\\++UE5\\Sync": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"name": "Launch NeedMoneyEditor (Debug)",
+				"request": "launch",
+				"program": "E:\\epic\\UE_5.3\\Engine\\Binaries\\Win64\\UnrealEditor-Win64-Debug.exe",
+				"preLaunchTask": "NeedMoneyEditor Win64 Debug Build",
+				"args": [
+					"D:\\unreal\\NeedMoney\\NeedMoney.uproject"
+				],
+				"cwd": "E:\\epic\\UE_5.3",
+				"stopAtEntry": false,
+				"console": "externalTerminal",
+				"type": "cppvsdbg",
+				"visualizerFile": "E:\\epic\\UE_5.3\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+				"sourceFileMap": {
+					"D:\\build\\++UE5\\Sync": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"name": "Launch NeedMoneyEditor (DebugGame)",
+				"request": "launch",
+				"program": "E:\\epic\\UE_5.3\\Engine\\Binaries\\Win64\\UnrealEditor-Win64-DebugGame.exe",
+				"preLaunchTask": "NeedMoneyEditor Win64 DebugGame Build",
+				"args": [
+					"D:\\unreal\\NeedMoney\\NeedMoney.uproject"
+				],
+				"cwd": "E:\\epic\\UE_5.3",
+				"stopAtEntry": false,
+				"console": "externalTerminal",
+				"type": "cppvsdbg",
+				"visualizerFile": "E:\\epic\\UE_5.3\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+				"sourceFileMap": {
+					"D:\\build\\++UE5\\Sync": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"name": "Launch NeedMoneyEditor (Development)",
+				"request": "launch",
+				"program": "E:\\epic\\UE_5.3\\Engine\\Binaries\\Win64\\UnrealEditor.exe",
+				"preLaunchTask": "NeedMoneyEditor Win64 Development Build",
+				"args": [
+					"D:\\unreal\\NeedMoney\\NeedMoney.uproject"
+				],
+				"cwd": "E:\\epic\\UE_5.3",
+				"stopAtEntry": false,
+				"console": "externalTerminal",
+				"type": "cppvsdbg",
+				"visualizerFile": "E:\\epic\\UE_5.3\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+				"sourceFileMap": {
+					"D:\\build\\++UE5\\Sync": "E:\\epic\\UE_5.3"
+				}
+			},
+			{
+				"name": "Generate Project Files",
+				"type": "coreclr",
+				"request": "launch",
+				"preLaunchTask": "UnrealBuildTool Win64 Development Build",
+				"program": "E:\\epic\\UE_5.3\\Engine\\Build\\BatchFiles\\RunUBT.bat",
+				"args": [
+					"-projectfiles",
+					"-vscode",
+					"-project=D:\\unreal\\NeedMoney\\NeedMoney.uproject",
+					"-game",
+					"-engine",
+					"-dotnet"
+				],
+				"console": "externalTerminal",
+				"stopAtEntry": false,
+				"cwd": "E:\\epic\\UE_5.3"
+			}
+		]
+	}
+}
