@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"		
-#include "RomanCharacter.generated.h"
+#include "MyRomanCharacter.generated.h"
 
 class USpringArmComponent;
 class UCameraComponent;
@@ -17,7 +17,7 @@ DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
 UCLASS(config=Game)
 
-class ARomanCharacter : public ACharacter
+class AMyRomanCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
@@ -47,7 +47,7 @@ class ARomanCharacter : public ACharacter
 
 public:
 	// Sets default values for this character's properties
-	ARomanCharacter();
+	AMyRomanCharacter();
 
 protected:
 

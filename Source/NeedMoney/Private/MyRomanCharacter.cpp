@@ -1,6 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-#include "RomanCharacter.h"
+#include "MyRomanCharacter.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "EnhancedInputComponent.h"
@@ -12,7 +10,7 @@
 
 
 // Sets default values
-ARomanCharacter::ARomanCharacter() {
+AMyRomanCharacter::AMyRomanCharacter() {
   // Set size for collision capsule
   GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
@@ -40,7 +38,7 @@ ARomanCharacter::ARomanCharacter() {
 }
 
 // Called when the game starts or when spawned
-void ARomanCharacter::BeginPlay() {
+void AMyRomanCharacter::BeginPlay() {
   Super::BeginPlay();
 
   if (APlayerController* PlayerController  =
@@ -55,16 +53,16 @@ void ARomanCharacter::BeginPlay() {
 }
 
 // Called to bind functionality to input
-void ARomanCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent) 
+void AMyRomanCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent) 
 {
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent))
 	{
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
 
-		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ARomanCharacter::Move);
+		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AMyRomanCharacter::Move);
 
-		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ARomanCharacter::Look);
+		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AMyRomanCharacter::Look);
 	}
 	else {
 	{
@@ -73,7 +71,7 @@ void ARomanCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputComp
 	}
 }
 
-void ARomanCharacter::Move(const FInputActionValue& Value)
+void AMyRomanCharacter::Move(const FInputActionValue& Value)
 {
 	FVector2D MovementVector = Value.Get<FVector2D>();
 
@@ -91,7 +89,7 @@ void ARomanCharacter::Move(const FInputActionValue& Value)
 	}
 }
 
-void ARomanCharacter::Look(const FInputActionValue& Value)
+void AMyRomanCharacter::Look(const FInputActionValue& Value)
 {
 	FVector2D LookAxisVector = Value.Get<FVector2D>();
 
@@ -102,3 +100,4 @@ void ARomanCharacter::Look(const FInputActionValue& Value)
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
 }
+
