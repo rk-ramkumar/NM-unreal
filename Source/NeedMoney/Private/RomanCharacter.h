@@ -6,24 +6,62 @@
 #include "GameFramework/Character.h"
 #include "RomanCharacter.generated.h"
 
+class USpringArmComponent;
+class UCameraComponent;
+class UInputAction;
+class UInputMappingContext;
+struct FInputActionValue
+
 UCLASS()
 class ARomanCharacter : public ACharacter
 {
 	GENERATED_BODY()
+
+	// Camera boom positioning the camera behind the character
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = {AllowPrivateAccess = "true"})
+	USpringArmComponent* CameraBoom;
+
+	// Follow Camera
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+	UCameraComponent* FollowCamera;
+
+	// MappingContext
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputMappingContext* DefaultMappingContext;
+
+	// Jump Input Action 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta= (AllowPrivateAccess = "true"))
+	UInputAction* JumpAction;
+
+	// Move Input Action 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta= (AllowPrivateAccess = "true"))
+	UInputAction* MoveAction;
+
+	// Look Input Action 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta= (AllowPrivateAccess = "true"))
+	UInputAction* LookAction;
 
 public:
 	// Sets default values for this character's properties
 	ARomanCharacter();
 
 protected:
+
+	// Called for movement Input 
+	void Move(const FInputActionValue& Value);
+
+	void Look(const FInputActionValue& Value);
+
+protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
+	
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+public:
+
+	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
+
+	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 };
