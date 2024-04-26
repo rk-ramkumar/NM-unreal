@@ -46,8 +46,8 @@ class AMyRomanCharacter : public ACharacter
 	UInputAction* LookAction;
 
 	// Crouch Input Action 
-	// UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	// UInputAction* CrouchAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* CrouchAction;
 
 	// Sprint Input Action 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta= (AllowPrivateAccess = "true"))
