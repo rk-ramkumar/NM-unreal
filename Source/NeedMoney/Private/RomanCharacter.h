@@ -4,21 +4,25 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Logging/LogMacros.h"		
 #include "RomanCharacter.generated.h"
 
 class USpringArmComponent;
 class UCameraComponent;
 class UInputAction;
 class UInputMappingContext;
-struct FInputActionValue
+struct FInputActionValue;
 
-UCLASS()
+DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
+
+UCLASS(config=Game)
+
 class ARomanCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
 	// Camera boom positioning the camera behind the character
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = {AllowPrivateAccess = "true"})
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	USpringArmComponent* CameraBoom;
 
 	// Follow Camera
