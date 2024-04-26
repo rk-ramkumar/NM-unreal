@@ -45,6 +45,14 @@ class AMyRomanCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta= (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
 
+	// Crouch Input Action 
+	// UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	// UInputAction* CrouchAction;
+
+	// Sprint Input Action 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta= (AllowPrivateAccess = "true"))
+	UInputAction* SprintAction;
+
 public:
 	// Sets default values for this character's properties
 	AMyRomanCharacter();
@@ -55,6 +63,10 @@ protected:
 	void Move(const FInputActionValue& Value);
 
 	void Look(const FInputActionValue& Value);
+
+	void BeginSprint(const FInputActionValue& Value);
+
+	void EndSprint(const FInputActionValue& Value);
 
 protected:
 	// Called when the game starts or when spawned

@@ -53,12 +53,18 @@ void AMyRomanCharacter::BeginPlay() {
 }
 
 // Called to bind functionality to input
-void AMyRomanCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent) 
+void AMyRomanCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) 
 {
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent))
 	{
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
+		
+		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Started, this, &AMyRomanCharacter::BeginSprint);
+		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Completed, this, &AMyRomanCharacter::EndSprint);
+
+		// EnhancedInputComponent->BindAction(CrouchAction, ETriggerEvent::Started, this, &ACharacter::Crouch);
+		// EnhancedInputComponent->BindAction(CrouchAction, ETriggerEvent::Completed, this, &ACharacter::UnCrouch);
 
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AMyRomanCharacter::Move);
 
@@ -101,3 +107,12 @@ void AMyRomanCharacter::Look(const FInputActionValue& Value)
 	}
 }
 
+void AMyRomanCharacter::BeginSprint(const FInputActionValue& Value)
+{
+	GetCharacterMovement()->MaxWalkSpeed = 2000.0f;
+}
+
+void AMyRomanCharacter::EndSprint(const FInputActionValue& Value)
+{
+	GetCharacterMovement()->MaxWalkSpeed = 500.0f;
+}
