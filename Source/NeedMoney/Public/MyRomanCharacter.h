@@ -68,6 +68,10 @@ protected:
 
 	void EndSprint(const FInputActionValue& Value);
 
+	void crouch(const FInputActionValue& Value);
+
+	void unCrouch(const FInputActionValue& Value);
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

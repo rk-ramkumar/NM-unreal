@@ -63,8 +63,8 @@ void AMyRomanCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Started, this, &AMyRomanCharacter::BeginSprint);
 		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Completed, this, &AMyRomanCharacter::EndSprint);
 
-		// EnhancedInputComponent->BindAction(CrouchAction, ETriggerEvent::Started, this, &ACharacter::Crouch);
-		// EnhancedInputComponent->BindAction(CrouchAction, ETriggerEvent::Completed, this, &ACharacter::UnCrouch);
+		EnhancedInputComponent->BindAction(CrouchAction, ETriggerEvent::Started, this, &AMyRomanCharacter::crouch);
+		EnhancedInputComponent->BindAction(CrouchAction, ETriggerEvent::Completed, this, &AMyRomanCharacter::unCrouch);
 
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AMyRomanCharacter::Move);
 
@@ -115,4 +115,15 @@ void AMyRomanCharacter::BeginSprint(const FInputActionValue& Value)
 void AMyRomanCharacter::EndSprint(const FInputActionValue& Value)
 {
 	GetCharacterMovement()->MaxWalkSpeed = 500.0f;
+}
+
+void AMyRomanCharacter::crouch(const FInputActionValue& Value)
+{
+	Crouch();
+
+}
+
+void AMyRomanCharacter::unCrouch(const FInputActionValue& Value)
+{
+	UnCrouch();
 }
