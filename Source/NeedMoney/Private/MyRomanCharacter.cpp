@@ -7,12 +7,16 @@
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "InputActionValue.h"
+#include "Animation/AnimSequence.h" // Include for UAnimSequence
+#include "UObject/ConstructorHelpers.h"
+#include "Animation/SkeletalMeshActor.h"
 
 
 // Sets default values
 AMyRomanCharacter::AMyRomanCharacter() {
   // Set size for collision capsule
   GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
+	
 
   bUseControllerRotationPitch = false;
   bUseControllerRotationYaw = false;
@@ -40,6 +44,19 @@ AMyRomanCharacter::AMyRomanCharacter() {
 // Called when the game starts or when spawned
 void AMyRomanCharacter::BeginPlay() {
   Super::BeginPlay();
+  if (IdleAnim != nullptr)
+	{		
+     	
+		if (USkeletalMeshComponent* mesh = AMyRomanCharacter::GetMesh())
+		{
+			mesh->PlayAnimation(IdleAnim, true);
+		}
+	}
+	else
+	{
+		// Log failure
+		UE_LOG(LogTemp, Error, TEXT("Failed to load animation asset!"));
+	}
 
   if (APlayerController* PlayerController  =
           Cast<APlayerController>(Controller)) {
