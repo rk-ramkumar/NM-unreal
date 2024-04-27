@@ -16,7 +16,13 @@
 AMyRomanCharacter::AMyRomanCharacter() {
   // Set size for collision capsule
   GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
-	
+
+  AnimationMap.Add(EAnimationState::IDLE, TArray<UAnimSequence*>());
+  AnimationMap.Add(EAnimationState::RUNNING, TArray<UAnimSequence*>());
+  AnimationMap.Add(EAnimationState::FALLING, TArray<UAnimSequence*>());
+  AnimationMap.Add(EAnimationState::LANDING, TArray<UAnimSequence*>());
+  AnimationMap.Add(EAnimationState::WALKING, TArray<UAnimSequence*>());
+  AnimationMap.Add(EAnimationState::JUMPING, TArray<UAnimSequence*>());
 
   bUseControllerRotationPitch = false;
   bUseControllerRotationYaw = false;
@@ -44,19 +50,9 @@ AMyRomanCharacter::AMyRomanCharacter() {
 // Called when the game starts or when spawned
 void AMyRomanCharacter::BeginPlay() {
   Super::BeginPlay();
-  if (IdleAnim != nullptr)
-	{		
-     	
-		if (USkeletalMeshComponent* mesh = AMyRomanCharacter::GetMesh())
-		{
-			mesh->PlayAnimation(IdleAnim, true);
-		}
-	}
-	else
-	{
-		// Log failure
-		UE_LOG(LogTemp, Error, TEXT("Failed to load animation asset!"));
-	}
+  AMyRomanCharacter::SetupAnimationMap();
+  CurrentAnimation = EAnimationState::IDLE;
+  AMyRomanCharacter::UpdateAnimation();
 
   if (APlayerController* PlayerController  =
           Cast<APlayerController>(Controller)) {
@@ -143,4 +139,38 @@ void AMyRomanCharacter::crouch(const FInputActionValue& Value)
 void AMyRomanCharacter::unCrouch(const FInputActionValue& Value)
 {
 	UnCrouch();
+}
+
+void AMyRomanCharacter::Landed(const FHitResult& Hit)
+{
+	Super::Landed(Hit);
+	CurrentAnimation = EAnimationState::LANDING;
+  	AMyRomanCharacter::UpdateAnimation();
+
+}
+
+void AMyRomanCharacter::UpdateAnimation()
+{
+	TArray<UAnimSequence*>* Animations = AMyRomanCharacter::AnimationMap.Find(CurrentAnimation);
+	if (Animations)
+	{	
+		if (Animations->Num() > 0)
+		{
+			UAnimSequence* AnimationSequence = (*Animations)[0];
+			if (USkeletalMeshComponent* mesh = AMyRomanCharacter::GetMesh())
+			{
+				mesh->PlayAnimation(AnimationSequence, true);
+			}
+		}
+	}
+}
+
+void AMyRomanCharacter::SetupAnimationMap()
+{
+    AMyRomanCharacter::AnimationMap[EAnimationState::IDLE].Add(IdleAnim); 
+    AMyRomanCharacter::AnimationMap[EAnimationState::RUNNING].Add(RunAnim);
+    AMyRomanCharacter::AnimationMap[EAnimationState::FALLING].Add(FallAnim);
+    AMyRomanCharacter::AnimationMap[EAnimationState::LANDING].Add(LandAnim);
+    AMyRomanCharacter::AnimationMap[EAnimationState::WALKING].Add(WalkAnim);
+    AMyRomanCharacter::AnimationMap[EAnimationState::JUMPING].Add(JumpAnim);
 }

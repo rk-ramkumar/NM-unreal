@@ -16,7 +16,18 @@ struct FInputActionValue;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
+UENUM(BlueprintType)
+enum class EAnimationState : uint8
+{
+	IDLE UMETA(DisplayName = "IDLE"),
+	RUNNING UMETA(DisplayName = "RUNNING"),
+	FALLING UMETA(DisplayName = "FALLING"),
+	LANDING UMETA(DisplayName = "LANDING"),
+	WALKING UMETA(DisplayName = "WALKING"),
+	JUMPING UMETA(DisplayName = "JUMPING")
+};
 UCLASS(config=Game)
+
 
 class AMyRomanCharacter : public ACharacter
 {
@@ -54,13 +65,32 @@ class AMyRomanCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta= (AllowPrivateAccess = "true"))
 	UInputAction* SprintAction;
 
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animation", meta = (AllowPrivateAccess = "true"))
+	EAnimationState CurrentAnimation;
+
 	UPROPERTY(EditAnywhere, Category = "Animation")
     UAnimSequence* IdleAnim;
 
+	UPROPERTY(EditAnywhere, Category = "Animation")
+    UAnimSequence* RunAnim;
+
+	UPROPERTY(EditAnywhere, Category = "Animation")
+    UAnimSequence* FallAnim;
+
+	UPROPERTY(EditAnywhere, Category = "Animation")
+    UAnimSequence* LandAnim;
+
+	UPROPERTY(EditAnywhere, Category = "Animation")
+    UAnimSequence* WalkAnim;
+
+	UPROPERTY(EditAnywhere, Category = "Animation")
+    UAnimSequence* JumpAnim;
 
 public:
 	// Sets default values for this character's properties
 	AMyRomanCharacter();
+	TMap<EAnimationState, TArray<UAnimSequence*>> AnimationMap;
 
 protected:
 
@@ -77,6 +107,10 @@ protected:
 
 	void unCrouch(const FInputActionValue& Value);
 
+	void UpdateAnimation();
+
+	void SetupAnimationMap();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -89,4 +123,6 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+	
+	void Landed(const FHitResult& Hit) override;
 };
