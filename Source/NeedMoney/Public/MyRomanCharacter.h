@@ -90,7 +90,6 @@ class AMyRomanCharacter : public ACharacter
 public:
 	// Sets default values for this character's properties
 	AMyRomanCharacter();
-	TMap<EAnimationState, TArray<UAnimSequence*>> AnimationMap;
 
 protected:
 
@@ -106,6 +105,8 @@ protected:
 	void crouch(const FInputActionValue& Value);
 
 	void unCrouch(const FInputActionValue& Value);
+
+	virtual void OnMovementModeChanged(EMovementMode PrevMovementMode, uint8 PreviousCustomMode) override;
 
 	void UpdateAnimation();
 
@@ -125,4 +126,10 @@ public:
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 	
 	void Landed(const FHitResult& Hit) override;
+
+	void Jump() override;
+
+	void StopJumping() override;
+
+	void PlayAnimation(UAnimationAsset* Animation, const bool loop);
 };

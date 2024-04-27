@@ -17,13 +17,6 @@ AMyRomanCharacter::AMyRomanCharacter() {
   // Set size for collision capsule
   GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
-  AnimationMap.Add(EAnimationState::IDLE, TArray<UAnimSequence*>());
-  AnimationMap.Add(EAnimationState::RUNNING, TArray<UAnimSequence*>());
-  AnimationMap.Add(EAnimationState::FALLING, TArray<UAnimSequence*>());
-  AnimationMap.Add(EAnimationState::LANDING, TArray<UAnimSequence*>());
-  AnimationMap.Add(EAnimationState::WALKING, TArray<UAnimSequence*>());
-  AnimationMap.Add(EAnimationState::JUMPING, TArray<UAnimSequence*>());
-
   bUseControllerRotationPitch = false;
   bUseControllerRotationYaw = false;
   bUseControllerRotationRoll = false;
@@ -45,14 +38,13 @@ AMyRomanCharacter::AMyRomanCharacter() {
   FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
   FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
   FollowCamera->bUsePawnControlRotation = false;
+  
+  CurrentAnimation = EAnimationState::IDLE;
 }
 
 // Called when the game starts or when spawned
 void AMyRomanCharacter::BeginPlay() {
   Super::BeginPlay();
-  AMyRomanCharacter::SetupAnimationMap();
-  CurrentAnimation = EAnimationState::IDLE;
-  AMyRomanCharacter::UpdateAnimation();
 
   if (APlayerController* PlayerController  =
           Cast<APlayerController>(Controller)) {
@@ -105,6 +97,7 @@ void AMyRomanCharacter::Move(const FInputActionValue& Value)
 
 		AddMovementInput(ForwardDirection, MovementVector.Y);
 		AddMovementInput(RightDirection, MovementVector.X);
+
 	}
 }
 
@@ -123,54 +116,94 @@ void AMyRomanCharacter::Look(const FInputActionValue& Value)
 void AMyRomanCharacter::BeginSprint(const FInputActionValue& Value)
 {
 	GetCharacterMovement()->MaxWalkSpeed = 2000.0f;
+	CurrentAnimation = EAnimationState::RUNNING;
+	AMyRomanCharacter::PlayAnimation(RunAnim, true);
+
 }
 
 void AMyRomanCharacter::EndSprint(const FInputActionValue& Value)
 {
 	GetCharacterMovement()->MaxWalkSpeed = 500.0f;
+	CurrentAnimation = EAnimationState::WALKING;
+	AMyRomanCharacter::UpdateAnimation();
+
 }
 
 void AMyRomanCharacter::crouch(const FInputActionValue& Value)
 {
 	Crouch();
-
 }
 
 void AMyRomanCharacter::unCrouch(const FInputActionValue& Value)
 {
 	UnCrouch();
+	CurrentAnimation = EAnimationState::IDLE;
 }
 
 void AMyRomanCharacter::Landed(const FHitResult& Hit)
 {
 	Super::Landed(Hit);
 	CurrentAnimation = EAnimationState::LANDING;
-  	AMyRomanCharacter::UpdateAnimation();
+	AMyRomanCharacter::PlayAnimation(LandAnim, false);
+}
 
+void AMyRomanCharacter::Jump()
+{
+	Super::Jump();
+	if (!GetCharacterMovement()->IsFalling()){
+		CurrentAnimation = EAnimationState::JUMPING;
+		AMyRomanCharacter::PlayAnimation(JumpAnim, false);
+	}
+
+}
+
+void AMyRomanCharacter::StopJumping()
+{
+	Super::StopJumping();
+	CurrentAnimation = EAnimationState::FALLING;
+}
+
+void AMyRomanCharacter::OnMovementModeChanged(EMovementMode PrevMovementMode, uint8 PreviousCustomMode)
+{
+	Super::OnMovementModeChanged(PrevMovementMode, PreviousCustomMode);
+    UpdateAnimation();
 }
 
 void AMyRomanCharacter::UpdateAnimation()
 {
-	TArray<UAnimSequence*>* Animations = AMyRomanCharacter::AnimationMap.Find(CurrentAnimation);
-	if (Animations)
-	{	
-		if (Animations->Num() > 0)
-		{
-			UAnimSequence* AnimationSequence = (*Animations)[0];
-			if (USkeletalMeshComponent* mesh = AMyRomanCharacter::GetMesh())
-			{
-				mesh->PlayAnimation(AnimationSequence, true);
-			}
-		}
-	}
+	UAnimSequence* CharacterAnimation = nullptr;
+
+	switch (GetCharacterMovement()->MovementMode)
+    {
+    case MOVE_Walking:
+		if (FMath::IsNearlyZero(GetVelocity().Size()))
+        {
+            CurrentAnimation = EAnimationState::IDLE;
+            CharacterAnimation = IdleAnim;
+        }
+        else
+        {
+            CurrentAnimation = EAnimationState::WALKING;
+            CharacterAnimation = WalkAnim;
+        }
+		AMyRomanCharacter::PlayAnimation(CharacterAnimation, true);
+        break;
+    case MOVE_Falling:
+        CurrentAnimation = EAnimationState::FALLING;
+		AMyRomanCharacter::PlayAnimation(FallAnim, true);
+        break;
+    default:
+        CurrentAnimation = EAnimationState::IDLE;
+		AMyRomanCharacter::PlayAnimation(IdleAnim, true);
+        break;
+    }
+
 }
 
-void AMyRomanCharacter::SetupAnimationMap()
+void AMyRomanCharacter::PlayAnimation(UAnimationAsset* Animation, const bool loop)
 {
-    AMyRomanCharacter::AnimationMap[EAnimationState::IDLE].Add(IdleAnim); 
-    AMyRomanCharacter::AnimationMap[EAnimationState::RUNNING].Add(RunAnim);
-    AMyRomanCharacter::AnimationMap[EAnimationState::FALLING].Add(FallAnim);
-    AMyRomanCharacter::AnimationMap[EAnimationState::LANDING].Add(LandAnim);
-    AMyRomanCharacter::AnimationMap[EAnimationState::WALKING].Add(WalkAnim);
-    AMyRomanCharacter::AnimationMap[EAnimationState::JUMPING].Add(JumpAnim);
+	if (USkeletalMeshComponent* mesh = AMyRomanCharacter::GetMesh())
+	{
+		mesh->PlayAnimation(Animation, loop);
+	}
 }
